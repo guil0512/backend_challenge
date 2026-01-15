@@ -1,0 +1,51 @@
+services:
+    # custom image
+    app:
+        build:
+            args:
+                user: hub
+                uid: 1000
+            context: ./
+            dockerfile: Dockerfile
+        image: backend_challenge
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www/
+        restart: unless-stopped
+        networks:
+            - docker-laravel
+
+    #nginx
+    nginx:
+        image: nginx:alpine
+        restart: always
+        ports:
+            - 80:80
+            - 5173:5173
+        volumes:
+            - ./:/var/www
+            - ./docker/nginx/:/etc/nginx/conf.d/
+            - ./vendor:/var/www/vendor
+
+        networks:
+            - docker-laravel
+
+    # db
+    mysql:
+        image: mysql:8.0.32
+        restart: always
+        ports:
+            - 3307:3306
+        volumes:
+            - ./.docker/mysql:/var/lib/mysql
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+        networks:
+            - docker-laravel
+
+networks:
+    docker-laravel:
+        driver: bridge
