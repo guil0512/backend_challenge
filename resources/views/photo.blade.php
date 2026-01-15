@@ -35,7 +35,7 @@
                     </div>
 
                     <form action="{{ route('produtos.photo', $produto->id) }}" method="POST" enctype="multipart/form-data">
-                        @csrf
+                        @csrf              
                         <div class="mb-3">
                             <label class="form-label">Nova Imagem</label>
                             <input type="file" name="photo" class="form-control">
