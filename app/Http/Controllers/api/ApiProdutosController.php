@@ -80,7 +80,7 @@ public function show(string $id)
         } catch (ModelNotFoundException $e) {
             return response()->json(['erro' => 'Produto não encontrado para atualizar'], 404);
         } catch (Exception $e) {
-            return response()->json(['erro' => 'Erro interno', 'debug' => $e->getMessage()], 500);
+            return response()->json(['erro' => 'Preencha os campos corretamente.', 'debug' => $e->getMessage()], 500);
         }
     }
 
