@@ -1,10 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\api\UploadController;
 
-Route::post('/produtos/{id}/photo', [PhotoController::class, 'uploadPhoto'])
-     ->name('produtos.photo');
-
-Route::get('/produtos/{id}', [PhotoController::class, 'showUploadForm'])
-    ->name('produtos.photo.form');
+Route::post('/produtos/{id}/upload-foto', [UploadController::class, 'uploadFoto']);
