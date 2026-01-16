@@ -40,12 +40,12 @@
         <td>R$ {{ number_format($produto->price, 2, ',', '.') }}</td>
 
         <td>
-            <div class="d-flex gap-1">
+            <div class="d-flex align-items-center gap-2">
                 <a href="{{ route('produtos.edit', $produto->id) }}" class="btn btn-dark btn-sm">
                     Editar
                 </a>
 
-                <form action="{{ route('apiprodutos.destroy', $produto->id) }}" method="POST">
+                <form action="{{ route('apiprodutos.destroy', $produto->id) }}" method="POST" class="m-0">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Excluir?')">
